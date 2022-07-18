@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: second(),
             ),
             Center(
-              child: Text("CALLS VIEW"),
+              child: first(),
             )
           ]),
         ),

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,10 +14,10 @@ class first extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white30,
-        body: Container(
-          margin: const EdgeInsets.all(50),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(50),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const <Widget>[
               TextField(
                   decoration: InputDecoration(
@@ -56,20 +58,39 @@ class first extends StatelessWidget {
             child: FloatingActionButton(
               backgroundColor: Colors.orange,
               onPressed: () async => {
-                image = (await _picker.pickImage(source: ImageSource.gallery))
-                    as Image,
-                const AlertDialog(
-                  title: Text("Upload"),
-                  // Retrieve the text which the user has entered by
-                  // using the TextEditingController.
-                  content: Text("Upload to Firebase ? "),
-                  actions: <Widget>[
-                    Text('OK'),
-                  ],
-                )
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const AlertDialog(
+                        title: Text("Upload"),
+                        content: Text("Upload to Firebase ? "),
+                        actions: <Widget>[
+                          SizedBox(
+                            height: 30,
+                            width: 40,
+                            child: Text(
+                              "No",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.orange),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30,
+                            width: 40,
+                            child: Text(
+                              "Yes",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue),
+                            ),
+                          )
+                        ],
+                      );
+                    })
               },
               tooltip: "Upload",
-              child: const Icon(Icons.upload),
+              child: const Icon(Icons.heart_broken_rounded),
             )),
       );
 }
